@@ -1,5 +1,27 @@
 importScripts("config.js");
 
+chrome.webNavigation.onBeforeNavigate.addListener(details => {
+	if (details.frameId !== 0) {
+		return;
+	}
+
+	if (!details.url.startsWith("http://") && !details.url.startsWith("https://")) {
+		return;
+	}
+
+	if (!isBlockedTime()) {
+		return;
+	}
+
+	if (!shouldBlock(details.url)) {
+		return;
+	}
+
+	chrome.tabs.update(details.tabId, {
+		url: chrome.runtime.getURL("blocked.html")
+	});
+});
+
 function isBlockedTime() {
 	const now = new Date();
 
@@ -38,6 +60,11 @@ function normalizeHost(hostname) {
 function shouldBlock(url) {
 	try {
 		const parsedUrl = new URL(url);
+
+		if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+			return false;
+		}
+
 		const host = normalizeHost(parsedUrl.hostname);
 
 		return BLOCKED_SITES.some(site => {

@@ -2,6 +2,7 @@
 	"manifest_version": 3,
 	"name": "Local Time Site Blocker",
 	"version": "1.0",
+	"incognito": "split",
 	"permissions": [
 		"webNavigation"
 	],

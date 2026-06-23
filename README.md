@@ -39,7 +39,29 @@ Reload
 
 on the extension card.
 
-### 3. Done
+### 3. Enable Incognito blocking
+
+Chrome disables extensions in Incognito by default.
+
+Open:
+
+```text
+chrome://extensions
+```
+
+Click:
+
+```text
+Details
+```
+
+Enable:
+
+```text
+Allow in Incognito
+```
+
+### 4. Done
 
 Before 5:00 PM:
 
@@ -55,7 +77,7 @@ youtube.com     ✅ Available
 facebook.com    ✅ Available
 ```
 
-> Important, again: Any time you change `config.js`, you must reload the extension from `chrome://extensions`.
+> **Important, again:** Any time you change `config.js`, you must reload the extension from `chrome://extensions`.
 
 ---
 
