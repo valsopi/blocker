@@ -1,0 +1,14 @@
+{
+	"manifest_version": 3,
+	"name": "Local Time Site Blocker",
+	"version": "1.0",
+	"permissions": [
+		"webNavigation"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	],
+	"background": {
+		"service_worker": "background.js"
+	}
+}

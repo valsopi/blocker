@@ -1,0 +1,3 @@
+// files not to be pushed on repo
+git update-index --assume-unchanged .gitnotes &&
+git update-index --assume-unchanged config.js

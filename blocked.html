@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Blocked</title>
+
+		<script src="config.js"></script>
+		<script src="blocked.js"></script>
+
+		<style>
+			body {
+				font-family: system-ui, sans-serif;
+				display: grid;
+				place-items: center;
+				min-height: 100vh;
+				margin: 0;
+				background: #111;
+				color: white;
+			}
+
+			main {
+				text-align: center;
+				max-width: 520px;
+				padding: 32px;
+			}
+
+			h1 {
+				font-size: 42px;
+				margin-bottom: 8px;
+			}
+
+			p {
+				font-size: 18px;
+				opacity: .75;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>Blocked until <span id="until"></span></h1>
+			<p>Go build something instead.</p>
+		</main>
+	</body>
+</html>
