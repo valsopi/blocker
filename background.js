@@ -24,33 +24,64 @@ chrome.webNavigation.onBeforeNavigate.addListener(details => {
 
 function isBlockedTime() {
 	const now = new Date();
+	const day = now.getDay();
 
-	const match = BLOCK_UNTIL.match(/(\d+):(\d+)\s*(AM|PM)/i);
+	const isWeekend = day === 0 || day === 6;
 
-	if (!match) {
+	if (isWeekend && !BLOCK_WEEKENDS) {
 		return false;
 	}
 
-	let hours = parseInt(match[1]);
-	const minutes = parseInt(match[2]);
-	const period = match[3].toUpperCase();
+	const time = parseTime(BLOCK_UNTIL);
 
-	if (period === "PM" && hours !== 12) {
-		hours += 12;
-	}
-
-	if (period === "AM" && hours === 12) {
-		hours = 0;
+	if (!time) {
+		return false;
 	}
 
 	const unblockTime = new Date();
 
-	unblockTime.setHours(hours);
-	unblockTime.setMinutes(minutes);
+	unblockTime.setHours(time.hours);
+	unblockTime.setMinutes(time.minutes);
 	unblockTime.setSeconds(0);
 	unblockTime.setMilliseconds(0);
 
 	return now < unblockTime;
+}
+
+function parseTime(value) {
+	const cleanValue = value.trim();
+
+	let match = cleanValue.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
+
+	if (match) {
+		let hours = parseInt(match[1], 10);
+		const minutes = match[2] ? parseInt(match[2], 10) : 0;
+		const period = match[3].toUpperCase();
+
+		if (period === "PM" && hours !== 12) {
+			hours += 12;
+		}
+
+		if (period === "AM" && hours === 12) {
+			hours = 0;
+		}
+
+		return {
+			hours,
+			minutes,
+		};
+	}
+
+	match = cleanValue.match(/^(\d{1,2}):(\d{2})$/);
+
+	if (match) {
+		return {
+			hours: parseInt(match[1], 10),
+			minutes: parseInt(match[2], 10),
+		};
+	}
+
+	return null;
 }
 
 function normalizeHost(hostname) {
