@@ -15,6 +15,8 @@ Just edit a file, reload the extension, and get back to work.
 ```js
 const BLOCK_UNTIL = "5:00 PM";
 
+const BLOCK_WEEKENDS = true;
+
 const BLOCKED_SITES = [
 	"facebook.com",
 	"x.com",
@@ -162,6 +164,8 @@ Example:
 ```js
 const BLOCK_UNTIL = "5:00 PM";
 
+const BLOCK_WEEKENDS = false;
+
 const BLOCKED_SITES = [
 	"facebook.com",
 	"x.com",
@@ -186,6 +190,31 @@ Examples:
 const BLOCK_UNTIL = "4:00 PM";
 const BLOCK_UNTIL = "6:30 PM";
 const BLOCK_UNTIL = "9:00 PM";
+```
+
+After saving:
+
+1. Open `chrome://extensions`
+2. Click **Reload**
+
+---
+
+# Changing Weekend Behavior
+
+By default, weekends are **not blocked**.
+
+Edit:
+
+```js
+const BLOCK_WEEKENDS = false;
+```
+
+Examples:
+
+```js
+const BLOCK_WEEKENDS = false; // Saturday and Sunday are never blocked
+
+const BLOCK_WEEKENDS = true;  // Blocking applies every day
 ```
 
 After saving:
